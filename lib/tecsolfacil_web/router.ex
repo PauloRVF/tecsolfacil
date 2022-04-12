@@ -5,7 +5,9 @@ defmodule TecsolfacilWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", TecsolfacilWeb do
+  scope "/api/v1", TecsolfacilWeb.Api.V1 do
     pipe_through :api
+
+    get "/address/:cep", AddressController, :show
   end
 end
