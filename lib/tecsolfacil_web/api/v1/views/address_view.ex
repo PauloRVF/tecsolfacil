@@ -19,4 +19,8 @@ defmodule TecsolfacilWeb.Api.V1.AddressView do
   def render("404.json", %{cep: cep}) do
     %{error: %{detail: "cep #{cep} not found"}}
   end
+
+  def render("400.json", _) do
+    %{error: %{detail: "bad request"}}
+  end
 end
