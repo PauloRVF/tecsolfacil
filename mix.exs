@@ -42,7 +42,8 @@ defmodule Tecsolfacil.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:finch, "~> 0.11"}
+      {:finch, "~> 0.11"},
+      {:hammox, "~> 0.5", only: :test}
     ]
   end
 
