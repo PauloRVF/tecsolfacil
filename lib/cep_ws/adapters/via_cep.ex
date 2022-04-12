@@ -13,7 +13,7 @@ defmodule Tecsolfacil.CepWs.Adapters.ViaCep do
 
   defp handle_result({:ok, %{status: 200, body: body}}) do
     body = Jason.decode!(body)
-    IO.inspect(body)
+
     if Map.get(body, "erro") do
       {:error, %{body: body, status: 404}}
     else

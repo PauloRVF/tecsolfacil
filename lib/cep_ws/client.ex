@@ -11,5 +11,6 @@ defmodule Tecsolfacil.CepWs.Client do
 
   defp handle_result({:ok, %{status: 200, body: body}}), do: {:ok, body}
   defp handle_result({:error, %{status: 404}}), do: {:error, :not_found}
+  defp handle_result({:error, %{status: 400}}), do: {:error, :bad_request}
   defp handle_result({:error, reason}), do: {:error, reason}
 end
