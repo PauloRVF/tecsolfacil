@@ -7,6 +7,11 @@
 # General application configuration
 import Config
 
+config :tecsolfacil, Oban,
+  repo: Tecsolfacil.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10]
+
 config :tecsolfacil,
   cepws_adapter: Tecsolfacil.CepWs.Adapters.ViaCep
 

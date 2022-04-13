@@ -3,6 +3,8 @@ import Config
 config :tecsolfacil,
   cepws_adapter: Tecsolfacil.CepWs.Adapters.Mock
 
+config :tecsolfacil, Oban, testing: :inline
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
