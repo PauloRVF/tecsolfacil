@@ -4,6 +4,10 @@ defmodule Tecsolfacil.CepWs.Adapters.ViaCep do
   @behaviour Tecsolfacil.CepWs.Client
   @base_url "https://viacep.com.br/ws/"
 
+  @doc """
+    Adapter for cep_ws/client port, using the VIACEP API (https://viacep.com.br/)
+  """
+  @spec request(atom(), binary()) :: {:ok, map()} | {:error, map()}
   def request(method, resource) do
     method
     |> Finch.build(@base_url <> resource <> "/json")

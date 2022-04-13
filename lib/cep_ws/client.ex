@@ -3,6 +3,10 @@ defmodule Tecsolfacil.CepWs.Client do
   @adapter Application.get_env(:tecsolfacil, :cepws_adapter)
   @callback request(atom(), String.t()) :: {:ok, any()} | {:error, any()}
 
+  @doc """
+    Port for cep_ws consume, juts have a function that passing a cep returns the data from the chosen adapter
+  """
+  @spec get_cep(binary()) :: {:ok, map()} | {:error, any()}
   def get_cep(cep) do
     :get
     |> @adapter.request(cep)
