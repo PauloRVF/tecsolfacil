@@ -28,8 +28,6 @@ defmodule Tecsolfacil.CepWs.ClientTest do
     end
 
     test "when is not found" do
-      expected_body = %{"erro" => "true"}
-
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:error, :not_found}
       end)

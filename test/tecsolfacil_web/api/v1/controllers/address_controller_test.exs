@@ -2,9 +2,7 @@
 defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
   use TecsolfacilWeb.ConnCase, async: true
   alias Tecsolfacil.Addresses
-  alias Tecsolfacil.Addresses.Address
   alias Tecsolfacil.CepWs.Adapters.Mock, as: CepWsMock
-  alias Tecsolfacil.CepWs.Client
 
   @valid_address %{cep: "00000000", logradouro: "rua teste, 1"}
 
@@ -44,7 +42,6 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
     end
 
     test "when cep don't exist in neither search sources", %{conn: conn} do
-      expected_body = %{"erro" => "true"}
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:error, :not_found}
       end)
@@ -56,7 +53,6 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
     end
 
     test "when is a badly formatted cep", %{conn: conn} do
-      expected_body = %{"erro" => "true"}
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:error, :bad_request}
       end)
