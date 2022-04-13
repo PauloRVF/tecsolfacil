@@ -8,6 +8,9 @@
 import Config
 
 config :tecsolfacil,
+  cepws_adapter: Tecsolfacil.CepWs.Adapters.ViaCep
+
+config :tecsolfacil,
   ecto_repos: [Tecsolfacil.Repo]
 
 # Configures the endpoint
