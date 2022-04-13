@@ -15,7 +15,8 @@ defmodule Tecsolfacil.Addresses.ExportAsCsv do
   end
 
   defp parse_as_csv_string(address_list) do
-    headers = "id,cep,logradouro,complemento,bairro,localidade,uf,ibge,gia,ddd,siafi,inserted_at,updated_at\n"
+    headers =
+      "id,cep,logradouro,complemento,bairro,localidade,uf,ibge,gia,ddd,siafi,inserted_at,updated_at\n"
 
     lines =
       Enum.map(address_list, fn e ->

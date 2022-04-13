@@ -3,7 +3,7 @@ import Config
 config :tecsolfacil,
   cepws_adapter: Tecsolfacil.CepWs.Adapters.Mock
 
-config :tecsolfacil, Oban, testing: :inline
+#config :tecsolfacil, Oban, testing: :inline
 
 # Configure your database
 #
