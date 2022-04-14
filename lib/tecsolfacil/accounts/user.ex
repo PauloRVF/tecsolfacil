@@ -5,12 +5,11 @@ defmodule Tecsolfacil.Accounts.User do
   @moduledoc """
     User schema
   """
-
   @fields ~w/username password password_hash/a
   schema "users" do
     field :username, :string
-    field :password, :string, redact: true
-    field :pasword_hash, :string
+    field :password, :string, virtual: true, redact: true
+    field :password_hash, :string
 
     timestamps()
   end
@@ -18,6 +17,7 @@ defmodule Tecsolfacil.Accounts.User do
   def changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, @fields)
+    |> validate_required([:username, :password])
     |> validate_username()
     |> validate_password(opts)
   end
@@ -25,8 +25,8 @@ defmodule Tecsolfacil.Accounts.User do
   defp validate_username(changeset) do
     changeset
     |> validate_required([:username])
-    |> validate_length(:password, min: 4, max: 30)
-    |> unsafe_validate_unique(:username, Plugfacil.Repo)
+    |> validate_length(:username, min: 4, max: 30)
+    |> unsafe_validate_unique(:username, Tecsolfacil.Repo)
     |> unique_constraint(:username)
   end
 

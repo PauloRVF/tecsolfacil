@@ -4,8 +4,7 @@ defmodule Tecsolfacil.Repo.Migrations.CreateUsers do
   def change do
     create table("users") do
       add :username, :string
-      add :password, :string, virtual: true
-      add :pasword_hash, :string
+      add :password_hash, :string
 
       timestamps()
     end
