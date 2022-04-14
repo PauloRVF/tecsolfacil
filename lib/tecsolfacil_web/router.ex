@@ -8,6 +8,7 @@ defmodule TecsolfacilWeb.Router do
   scope "/api/v1", TecsolfacilWeb.Api.V1 do
     pipe_through :api
 
+    post "/address/report", AddressController, :report
     get "/address/:cep", AddressController, :show
   end
 end

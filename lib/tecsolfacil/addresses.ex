@@ -14,6 +14,14 @@ defmodule Tecsolfacil.Addresses do
   end
 
   @doc """
+    List all Addresses
+  """
+  @spec list_all() :: [Address]
+  def list_all() do
+    Repo.all(Address)
+  end
+
+  @doc """
     Gets a single Address filtering by id
   """
   @spec get_by_id(integer()) :: Endereco | nil

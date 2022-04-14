@@ -1,6 +1,7 @@
 defmodule Tecsolfacil.MixProject do
   use Mix.Project
 
+
   def project do
     [
       app: :tecsolfacil,
@@ -10,7 +11,14 @@ defmodule Tecsolfacil.MixProject do
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -43,7 +51,10 @@ defmodule Tecsolfacil.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:finch, "~> 0.11"},
-      {:hammox, "~> 0.5", only: :test}
+      {:hammox, "~> 0.5", only: :test},
+      {:oban, "~> 2.11"},
+      {:swoosh, "~> 1.6"},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 

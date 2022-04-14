@@ -22,6 +22,20 @@ defmodule Tecsolfacil.AddressesTest do
     end
   end
 
+  describe "list_all/0" do
+    test "success when list all addresses" do
+      Addresses.create(%{cep: "00000000", logradouro: "rua teste, 1"})
+      Addresses.create(%{cep: "00000001", logradouro: "rua teste, 2"})
+
+      addresses = Addresses.list_all()
+
+      assert Enum.count(addresses) == 2
+      for address <- addresses do
+        assert %Address{} = address
+      end
+    end
+  end
+
   describe "get_by_id/1" do
     test "success when address exists" do
       {:ok, %{id: id}} = Addresses.create(@valid_address)
