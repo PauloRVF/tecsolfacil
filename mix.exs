@@ -44,7 +44,8 @@ defmodule Tecsolfacil.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:finch, "~> 0.11"},
       {:hammox, "~> 0.5", only: :test},
-      {:oban, "~> 2.11"}
+      {:oban, "~> 2.11"},
+      {:swoosh, "~> 1.6"}
     ]
   end
 

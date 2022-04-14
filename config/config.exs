@@ -7,6 +7,9 @@
 # General application configuration
 import Config
 
+config :swoosh, :api_client, false
+config :tecsolfacil, Tecsolfacil.Mailer, adapter: Swoosh.Adapters.Local
+
 config :tecsolfacil, Oban,
   repo: Tecsolfacil.Repo,
   plugins: [Oban.Plugins.Pruner],
@@ -36,3 +39,5 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
+
+config :swoosh, serve_mailbox: true, preview_port: 4001
