@@ -1,7 +1,8 @@
 defmodule Tecsolfacil.Addresses.BuildReportEmail do
   import Swoosh.Email
 
-  def call(dest_email, attachment_path) do
+  @spec call(binary(), binary()) :: map()
+  def call(dest_email, attachment_path \\ "") do
     new()
     |> to({"User", dest_email})
     |> from({"Tecsolfacil Admin", "no-reply@tecsolfacil.com"})
