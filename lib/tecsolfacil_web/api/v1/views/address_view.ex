@@ -23,4 +23,8 @@ defmodule TecsolfacilWeb.Api.V1.AddressView do
   def render("400.json", _) do
     %{error: %{detail: "bad request"}}
   end
+
+  def render("202.json", _) do
+    %{status: "accepted, processing request"}
+  end
 end
