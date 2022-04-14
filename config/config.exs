@@ -8,8 +8,8 @@
 import Config
 
 config :tecsolfacil, Tecsolfacil.Accounts.Guardian,
-       issuer: "tecsolfacil",
-       secret_key: "Dk+Jnh9olD/RXZaIWrJR++xzSLgALS1OjEjRH3FaUAg5d+vanlquQms3SalL237n"
+  issuer: "tecsolfacil",
+  secret_key: "Dk+Jnh9olD/RXZaIWrJR++xzSLgALS1OjEjRH3FaUAg5d+vanlquQms3SalL237n"
 
 config :swoosh, :api_client, false
 config :tecsolfacil, Tecsolfacil.Mailer, adapter: Swoosh.Adapters.Local
