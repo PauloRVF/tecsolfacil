@@ -54,7 +54,9 @@ defmodule Tecsolfacil.MixProject do
       {:oban, "~> 2.11"},
       {:swoosh, "~> 1.6"},
       {:excoveralls, "~> 0.10", only: :test},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:bcrypt_elixir, "~> 3.0"},
+      {:guardian, "~> 2.0"}
     ]
   end
 
