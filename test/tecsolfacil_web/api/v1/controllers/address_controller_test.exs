@@ -1,14 +1,14 @@
 defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
   use TecsolfacilWeb.ConnCase, async: true
   use Oban.Testing, repo: Tecsolfacil.Repo
+  alias Tecsolfacil.Accounts
   alias Tecsolfacil.Addresses
   alias Tecsolfacil.Addresses.ReportCsvByEmail
   alias Tecsolfacil.CepWs.Adapters.Mock, as: CepWsMock
-  alias Tecsolfacil.Accounts
 
   @valid_address %{cep: "00000000", logradouro: "rua teste, 1"}
 
-  defp get_token() do
+  defp get_token do
     {:ok, user} = Accounts.user_create(%{username: "username", password: "password"})
     {:ok, token, _} = Accounts.Guardian.encode_and_sign(user, %{typ: "access"})
     token
@@ -28,6 +28,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
 
     test "when cep not exists in database but exists on WS", %{conn: conn} do
       conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
+
       expected_body = %{
         "bairro" => "bairro",
         "cep" => "00000-000",
@@ -54,6 +55,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
 
     test "when cep don't exist in neither search sources", %{conn: conn} do
       conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
+
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:error, :not_found}
       end)
@@ -66,6 +68,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
 
     test "when is a badly formatted cep", %{conn: conn} do
       conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
+
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:error, :bad_request}
       end)

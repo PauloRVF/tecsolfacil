@@ -1,5 +1,6 @@
 defmodule TecsolfacilWeb.Api.V1.AuthErrorHandler do
   import Plug.Conn
+  @moduledoc false
 
   @behaviour Guardian.Plug.ErrorHandler
 

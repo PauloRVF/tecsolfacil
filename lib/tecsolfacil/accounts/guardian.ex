@@ -1,6 +1,9 @@
 defmodule Tecsolfacil.Accounts.Guardian do
   use Guardian, otp_app: :tecsolfacil
 
+  @moduledoc """
+    Guardian provider for user resource authentication
+  """
   def subject_for_token(%{id: id}, _claims) do
     sub = to_string(id)
     {:ok, sub}

@@ -7,7 +7,9 @@ defmodule TecsolfacilWeb.Router do
   end
 
   pipeline :authentication do
-    plug Guardian.Plug.Pipeline, module: Tecsolfacil.Accounts.Guardian, error_handler: AuthErrorHandler
+    plug Guardian.Plug.Pipeline,
+      module: Tecsolfacil.Accounts.Guardian,
+      error_handler: AuthErrorHandler
 
     plug Guardian.Plug.VerifyHeader, claims: %{"typ" => "access"}
     plug Guardian.Plug.EnsureAuthenticated
