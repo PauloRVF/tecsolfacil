@@ -13,8 +13,9 @@ defmodule Tecsolfacil.Addresses.ReportCsvByEmail do
 
     File.write!(filename, ExportAsCsv.call())
 
-    send_status = BuildReportEmail.call(email, filename) |>
-      Tecsolfacil.Mailer.deliver()
+    send_status =
+      BuildReportEmail.call(email, filename)
+      |> Tecsolfacil.Mailer.deliver()
 
     File.rm!(filename)
 

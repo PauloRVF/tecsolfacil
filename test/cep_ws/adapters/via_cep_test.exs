@@ -3,7 +3,6 @@ defmodule Tecsolfacil.CepWs.Adapters.ViaCepTest do
   alias Tecsolfacil.CepWs.Adapters.ViaCep
 
   describe "request/2" do
-
     @tag :integration
     test "when is a valid cep" do
       assert {:ok, response_content} = ViaCep.request(:get, "05014000")

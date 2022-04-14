@@ -1,5 +1,4 @@
 defmodule Tecsolfacil.CepWs.Client do
-
   @moduledoc """
     Port for cep_ws consume, juts have a function that passing a cep returns the data from the chosen adapter
   """

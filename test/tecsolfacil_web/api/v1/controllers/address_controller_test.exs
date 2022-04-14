@@ -1,4 +1,3 @@
-
 defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
   use TecsolfacilWeb.ConnCase, async: true
   use Oban.Testing, repo: Tecsolfacil.Repo
@@ -32,6 +31,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
         "siafi" => "0000",
         "uf" => "UF"
       }
+
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:ok, %{status: 200, body: expected_body}}
       end)
@@ -72,7 +72,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
       conn = post(conn, Routes.address_path(conn, :report, valid_body))
 
       assert response_body = json_response(conn, 202)
-      assert_enqueued worker: ReportCsvByEmail, args: valid_body
+      assert_enqueued(worker: ReportCsvByEmail, args: valid_body)
       assert response_body == %{"status" => "accepted, processing request"}
     end
 

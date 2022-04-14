@@ -2,7 +2,7 @@ defmodule Tecsolfacil.Repo.Migrations.CreateEnderecos do
   use Ecto.Migration
 
   def change do
-    create table "addresses" do
+    create table("addresses") do
       add :cep, :string
       add :logradouro, :string
       add :complemento, :string

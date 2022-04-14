@@ -35,7 +35,7 @@ defmodule Tecsolfacil.Addresses do
     Gets a single Address filtering by cep
   """
   @spec get_by_cep(binary()) :: Endereco | nil
-  def get_by_cep(cep), do: Repo.get_by(Address, [cep: cep])
+  def get_by_cep(cep), do: Repo.get_by(Address, cep: cep)
 
   @doc """
    Updates an Address
