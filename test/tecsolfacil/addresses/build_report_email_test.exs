@@ -1,7 +1,7 @@
 defmodule Tecsolfacil.Addresses.BuildReportEmailTest do
   use ExUnit.Case, async: true
-  alias Tecsolfacil.Addresses.BuildReportEmail
   alias Swoosh.Email
+  alias Tecsolfacil.Addresses.BuildReportEmail
 
   describe "call/2" do
     test "mail without attachment" do

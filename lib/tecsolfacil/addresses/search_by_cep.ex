@@ -2,6 +2,8 @@ defmodule Tecsolfacil.Addresses.SearchByCep do
   alias Tecsolfacil.Addresses
   alias Tecsolfacil.CepWs.Client
 
+  @moduledoc false
+
   @doc """
     Try get address from database, otherwise, try get address from a WS and persist data
   """

@@ -1,16 +1,17 @@
 defmodule Tecsolfacil.Addresses.ExportAsCsv do
   alias Tecsolfacil.Addresses
 
-  @doc """
+  @moduledoc """
   Export all address from database to a CSV
   """
+
   @spec call() :: list(binary())
-  def call() do
+  def call do
     get_addresses()
     |> parse_as_csv_string()
   end
 
-  defp get_addresses() do
+  defp get_addresses do
     Addresses.list_all()
   end
 

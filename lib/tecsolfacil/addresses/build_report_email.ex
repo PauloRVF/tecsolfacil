@@ -1,6 +1,10 @@
 defmodule Tecsolfacil.Addresses.BuildReportEmail do
   import Swoosh.Email
 
+  @moduledoc """
+    Swoosh email struct(template) for send a user CSV report
+  """
+
   @spec call(binary(), binary()) :: map()
   def call(dest_email, attachment_path \\ "") do
     new()
