@@ -23,5 +23,10 @@ defmodule Tecsolfacil.CepWs.Adapters.ViaCepTest do
       assert {:error, response_content} = ViaCep.request(:get, "05014999")
       assert 404 == response_content.status
     end
+
+    @tag :integration
+    test "when returns some error" do
+      assert {:error, %{reason: _}} = ViaCep.request(:get, ~s/"05014999"/)
+    end
   end
 end
