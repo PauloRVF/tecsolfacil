@@ -15,6 +15,7 @@ All email notifications (endpoint: api/v1/address/report) use swoosh local adapt
 
 # Doc API:
 ## Authentication (/api/v1/user/token)
+DESCRIPTION: Based on user and password generates a token JWT
 METHOD: Post
 Must pass a username and a password
 
@@ -23,6 +24,7 @@ curl -XPOST -H "Content-type: application/json" -d '{"user": {"username": "admin
 ```
 
 ## SearchCep (/api/v1/address/[cep]] {need authentication}
+DESCRIPTION: Passing a cep as URL parameter, try to find out in database, otherwise looks on external services
 METHOD: Get
 Must pass a JWT token
 
@@ -30,7 +32,8 @@ Must pass a JWT token
 curl -XGET -H 'authorization: bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWNzb2xmYWNpbCIsImV4cCI6MTY0OTk3NTEzNiwiaWF0IjoxNjQ5OTcxNTM2LCJpc3MiOiJ0ZWNzb2xmYWNpbCIsImp0aSI6ImM4ODM4ZTY1LWUyYmYtNGRhOS1hOTRhLTY0NDgxZGE1Nzk5MCIsIm5iZiI6MTY0OTk3MTUzNSwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.7N62BQmRQZyNbCZX2fiQJzILAkOIYDjUZgI_yAKLPMf_5sQ2EqvOdk86kG5ji6oJ-BnoH7wizVtJS6koVRnA4A' -H "Content-type: application/json" 'localhost:4000/api/v1/address/05014000'
 ```
 
-## SearchCep (/api/v1/address/report] {need authentication}
+## ReportCsv (/api/v1/address/report] {need authentication}
+DESCRIPTION: Request a CSV with all the address founds at moment in database, the request is asynchronous, notify when ready by email (body parameter)
 METHOD: Get
 Must pass a JWT token and a email in body
 
