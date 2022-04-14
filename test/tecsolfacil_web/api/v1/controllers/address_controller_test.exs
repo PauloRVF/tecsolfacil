@@ -4,11 +4,19 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
   alias Tecsolfacil.Addresses
   alias Tecsolfacil.Addresses.ReportCsvByEmail
   alias Tecsolfacil.CepWs.Adapters.Mock, as: CepWsMock
+  alias Tecsolfacil.Accounts
 
   @valid_address %{cep: "00000000", logradouro: "rua teste, 1"}
 
+  defp get_token() do
+    {:ok, user} = Accounts.user_create(%{username: "username", password: "password"})
+    {:ok, token, _} = Accounts.Guardian.encode_and_sign(user, %{typ: "access"})
+    token
+  end
+
   describe "show/2" do
     test "when cep exists in database", %{conn: conn} do
+      conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
       Addresses.create(@valid_address)
 
       conn = get(conn, Routes.address_path(conn, :show, "00000000"))
@@ -19,6 +27,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
     end
 
     test "when cep not exists in database but exists on WS", %{conn: conn} do
+      conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
       expected_body = %{
         "bairro" => "bairro",
         "cep" => "00000-000",
@@ -44,6 +53,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
     end
 
     test "when cep don't exist in neither search sources", %{conn: conn} do
+      conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:error, :not_found}
       end)
@@ -55,6 +65,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
     end
 
     test "when is a badly formatted cep", %{conn: conn} do
+      conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
         {:error, :bad_request}
       end)
@@ -68,6 +79,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
 
   describe "report/2" do
     test "when body contains an email", %{conn: conn} do
+      conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
       valid_body = %{"email" => "email@email.com.br"}
       conn = post(conn, Routes.address_path(conn, :report, valid_body))
 
@@ -77,6 +89,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
     end
 
     test "when body not contains an email", %{conn: conn} do
+      conn = conn |> put_req_header("authorization", "Bearer #{get_token()}")
       valid_body = %{}
       conn = post(conn, Routes.address_path(conn, :report, valid_body))
 
