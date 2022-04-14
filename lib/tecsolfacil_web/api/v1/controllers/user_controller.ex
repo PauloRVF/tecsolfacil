@@ -6,7 +6,7 @@ defmodule TecsolfacilWeb.Api.V1.UserController do
     %{"username" => username, "password" => password} = user
 
     if user = Accounts.user_get_by_username_and_password(username, password) do
-      {:ok, token, _} = Accounts.Guardian.encode_and_sign(user)
+      {:ok, token, _} = Accounts.Guardian.encode_and_sign(user, %{typ: "access"}, ttl: {1, :hour})
 
       conn
       |> render("token.json", token: token)
