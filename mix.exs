@@ -1,7 +1,6 @@
 defmodule Tecsolfacil.MixProject do
   use Mix.Project
 
-
   def project do
     [
       app: :tecsolfacil,

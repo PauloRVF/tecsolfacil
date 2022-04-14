@@ -30,6 +30,7 @@ defmodule Tecsolfacil.AddressesTest do
       addresses = Addresses.list_all()
 
       assert Enum.count(addresses) == 2
+
       for address <- addresses do
         assert %Address{} = address
       end

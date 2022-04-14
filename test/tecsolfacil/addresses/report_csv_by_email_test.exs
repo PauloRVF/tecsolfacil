@@ -1,8 +1,6 @@
 defmodule Tecsolfacil.Addresses.ReportCsvByEmailTest do
   use ExUnit.Case, async: true
   use Oban.Testing, repo: Tecsolfacil.Repo
-  import Swoosh.TestAssertions
-  alias Tecsolfacil.Addresses.BuildReportEmail
   alias Tecsolfacil.Addresses.ReportCsvByEmail
 
   describe "perform/1" do

@@ -7,8 +7,11 @@ defmodule Tecsolfacil.Addresses.ExportAsCsvTest do
       csv = Addresses.ExportAsCsv.call()
 
       assert Enum.count(csv) == 1
-      assert ["id,cep,logradouro,complemento,bairro,localidade,uf,ibge,gia,ddd,siafi,inserted_at,updated_at\n"] ==
-        csv
+
+      assert [
+               "id,cep,logradouro,complemento,bairro,localidade,uf,ibge,gia,ddd,siafi,inserted_at,updated_at\n"
+             ] ==
+               csv
     end
 
     test "generate a CSV with 2 registries" do
