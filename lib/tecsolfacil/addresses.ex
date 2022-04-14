@@ -3,6 +3,10 @@ defmodule Tecsolfacil.Addresses do
   alias Tecsolfacil.Addresses.Address
   alias Tecsolfacil.Repo
 
+  @moduledoc """
+    Repository module for Address schema
+  """
+
   @doc """
     Creates an Address
   """
@@ -17,7 +21,7 @@ defmodule Tecsolfacil.Addresses do
     List all Addresses
   """
   @spec list_all() :: [Address]
-  def list_all() do
+  def list_all do
     Repo.all(Address)
   end
 

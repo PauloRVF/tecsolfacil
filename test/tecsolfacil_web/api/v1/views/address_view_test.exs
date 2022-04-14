@@ -27,5 +27,17 @@ defmodule TecsolfacilWeb.Api.V1.AddressViewTest do
                error: %{detail: "cep 00000000 not found"}
              }
     end
+
+    test "when renderize an error 400" do
+      assert AddressView.render("400.json", cep: %{}) == %{
+               error: %{detail: "bad request"}
+             }
+    end
+
+    test "when renderize an error 202" do
+      assert AddressView.render("202.json", %{}) == %{
+               status: "accepted, processing request"
+             }
+    end
   end
 end

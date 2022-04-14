@@ -20,7 +20,7 @@ defmodule TecsolfacilWeb.Api.V1.AddressController do
     end
   end
 
-  def report(conn, %{"email" => email}=_params) do
+  def report(conn, %{"email" => email} = _params) do
     %{"email" => email}
     |> ReportCsvByEmail.new()
     |> Oban.insert()

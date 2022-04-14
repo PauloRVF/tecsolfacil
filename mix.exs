@@ -54,7 +54,8 @@ defmodule Tecsolfacil.MixProject do
       {:hammox, "~> 0.5", only: :test},
       {:oban, "~> 2.11"},
       {:swoosh, "~> 1.6"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 

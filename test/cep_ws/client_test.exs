@@ -27,12 +27,20 @@ defmodule Tecsolfacil.CepWs.ClientTest do
       assert response_body["cep"] == "00000-000"
     end
 
-    test "when is not found" do
+    test "when is some error" do
       Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
-        {:error, :not_found}
+        {:error, :some_reason}
       end)
 
-      assert {:error, :not_found} = Client.get_cep("00000001")
+      assert {:error, :some_reason} = Client.get_cep("00000001")
+    end
+
+    test "when is not found error" do
+      Hammox.expect(CepWsMock, :request, fn _method, _endpoint ->
+        {:error, %{status: 404}}
+      end)
+
+      assert {:error, :not_found} = Client.get_cep("AAAAAAAA")
     end
 
     test "when is not a valid formatted cep" do

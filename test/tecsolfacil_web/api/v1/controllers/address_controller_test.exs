@@ -1,7 +1,9 @@
 
 defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
   use TecsolfacilWeb.ConnCase, async: true
+  use Oban.Testing, repo: Tecsolfacil.Repo
   alias Tecsolfacil.Addresses
+  alias Tecsolfacil.Addresses.ReportCsvByEmail
   alias Tecsolfacil.CepWs.Adapters.Mock, as: CepWsMock
 
   @valid_address %{cep: "00000000", logradouro: "rua teste, 1"}
@@ -58,6 +60,25 @@ defmodule TecsolfacilWeb.Api.V1.AddressControllerTest do
       end)
 
       conn = get(conn, Routes.address_path(conn, :show, "AAAAAAA"))
+
+      assert response_body = json_response(conn, 400)
+      assert response_body == %{"error" => %{"detail" => "bad request"}}
+    end
+  end
+
+  describe "report/2" do
+    test "when body contains an email", %{conn: conn} do
+      valid_body = %{"email" => "email@email.com.br"}
+      conn = post(conn, Routes.address_path(conn, :report, valid_body))
+
+      assert response_body = json_response(conn, 202)
+      assert_enqueued worker: ReportCsvByEmail, args: valid_body
+      assert response_body == %{"status" => "accepted, processing request"}
+    end
+
+    test "when body not contains an email", %{conn: conn} do
+      valid_body = %{}
+      conn = post(conn, Routes.address_path(conn, :report, valid_body))
 
       assert response_body = json_response(conn, 400)
       assert response_body == %{"error" => %{"detail" => "bad request"}}

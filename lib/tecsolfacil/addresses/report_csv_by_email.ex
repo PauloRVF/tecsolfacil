@@ -3,6 +3,10 @@ defmodule Tecsolfacil.Addresses.ReportCsvByEmail do
   alias Tecsolfacil.Addresses.BuildReportEmail
   alias Tecsolfacil.Addresses.ExportAsCsv
 
+  @moduledoc """
+    Obar worker for generate a list of all addresses as CSV and send by email
+  """
+
   @impl Oban.Worker
   def perform(%Oban.Job{args: %{"email" => email} = _args}) do
     filename = "report#{get_datetime_string()}.CSV"
@@ -17,7 +21,7 @@ defmodule Tecsolfacil.Addresses.ReportCsvByEmail do
     send_status
   end
 
-  def get_datetime_string() do
+  def get_datetime_string do
     NaiveDateTime.local_now()
     |> NaiveDateTime.truncate(:second)
     |> NaiveDateTime.to_string()

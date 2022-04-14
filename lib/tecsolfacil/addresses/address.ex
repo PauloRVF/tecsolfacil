@@ -2,6 +2,10 @@ defmodule Tecsolfacil.Addresses.Address do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @moduledoc """
+    Address schema
+  """
+
   @fields ~w/cep logradouro complemento bairro localidade uf ibge gia ddd siafi/a
   schema "addresses" do
     field :cep, :string
